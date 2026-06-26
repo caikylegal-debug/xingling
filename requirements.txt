@@ -1,5 +1,7 @@
-torch
-transformers
+--extra-index-url https://download.pytorch.org/whl/cpu
+fastapi
+uvicorn[standard]
+pydantic
 safetensors
-flask
-gdown
+tokenizers
+torch
