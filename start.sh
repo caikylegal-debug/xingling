@@ -1,19 +1,25 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-mkdir -p zyluncpt_0_1_instruct_final
+set -e
 
-echo "Baixando arquivos grandes do Google Drive..."
+mkdir -p model
 
-pip install gdown
+echo "Verificando model.safetensors..."
 
-if [ ! -f zyluncpt_0_1_instruct_final/model.safetensors ]; then
-  gdown "https://drive.google.com/uc?id=1AjSGD5_lGQU03M7ap7_kxC64sxGsMQce" -O zyluncpt_0_1_instruct_final/model.safetensors
+if [ ! -f "model/model.safetensors" ]; then
+  echo "Baixando model.safetensors do Google Drive..."
+  gdown --fuzzy "https://drive.google.com/file/d/1AjSGD5_lGQU03M7ap7_kxC64sxGsMQce/view?usp=drive_link" -O model/model.safetensors
+else
+  echo "model.safetensors já existe."
 fi
 
-if [ ! -f zyluncpt_0_1_instruct_final/train_state.pt ]; then
-  gdown "https://drive.google.com/uc?id=1hnDuQ3hZQ4KCCx4UpjT1XU4matj1oS6E" -O zyluncpt_0_1_instruct_final/train_state.pt
+echo "Verificando tokenizer..."
+
+if [ ! -f "model/zyluncpt_tokenizer.json" ]; then
+  echo "ERRO: model/zyluncpt_tokenizer.json não encontrado."
+  echo "Coloque o tokenizer no repo ou adicione outro link para baixar ele também."
+  exit 1
 fi
 
-echo "Arquivos baixados. Iniciando servidor..."
-
-python app.py
+echo "Iniciando API..."
+uvicorn main:app --host 0.0.0.0 --port $PORT
