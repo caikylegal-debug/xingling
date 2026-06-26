@@ -1,0 +1,5 @@
+torch
+transformers
+safetensors
+flask
+gdown
