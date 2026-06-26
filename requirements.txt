@@ -5,3 +5,4 @@ pydantic
 safetensors
 tokenizers
 torch
+gdown
