@@ -8,7 +8,7 @@ echo "Verificando model.safetensors..."
 
 if [ ! -f "model/model.safetensors" ]; then
   echo "Baixando model.safetensors do Google Drive..."
-  gdown --fuzzy "https://drive.google.com/file/d/1AjSGD5_lGQU03M7ap7_kxC64sxGsMQce/view?usp=drive_link" -O model/model.safetensors
+  gdown "1AjSGD5_lGQU03M7ap7_kxC64sxGsMQce" -O model/model.safetensors
 else
   echo "model.safetensors já existe."
 fi
